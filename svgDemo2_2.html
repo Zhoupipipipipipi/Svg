@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SvgDemo2-2</title>
+	<link rel="stylesheet" type="text/css" href="css/svgDemo2.css">
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/snap.svg-min.js"></script>
+</head>
+<body>
+	<div class="show-box">
+		<div class="show-list show-list-1 showList" data-svgcolor="#ffaa8e">
+	    	<img src="image/top.png">
+	    </div>
+	    <div class="show-list show-list-2 showList" data-svgcolor="#ffdfba">
+	    	<img src="image/left.png">
+	    </div>
+	    <div class="show-list show-list-3 showList" data-svgcolor="#211a1b">
+	    	<img src="image/right.png">
+	    </div>
+	</div>
+	<script type="text/javascript">
+		var show_list = document.querySelectorAll(".show-list");
+		Array.prototype.space = function() {
+			return this.join(" ");
+		};
+		[].slice.call(show_list).forEach(function(list){
+			var svg_width = list.clientWidth * 1.5;
+			var svg_height = list.clientHeight * 1.5;
+			var svg_color = list.getAttribute("data-svgcolor");
+			var svg = Snap(svg_width,svg_height).attr({
+				"fill":svg_color,
+				"class":"shape_svg"
+			});
+			var path = svg.paper.path("");
+			list.append(svg.node)
+
+			//四个点
+			var p1=[0,0],p2=[svg_width,0],p3=[svg_width,svg_height];
+
+			//获取点移动的走向 y=ax+b
+			var a = -1*(svg_height/svg_width);
+			var b = svg_height;
+
+			list.addEventListener("mouseover",function(){
+				Snap.animate(svg_width,0,function(val){
+					var p4 = [val,a*val+b];
+					path.attr({
+						d:"M"+[p1.space(),p2.space(),p3.space(),p4.space(),p1.space()].join("L")+"Z"
+					});
+				},200,mina.easein);
+			});
+			list.addEventListener("mouseout",function(){
+				Snap.animate(0,svg_width,function(val){
+					var p4 = [val,a*val+b];
+					path.attr({
+						d:"M"+[p1.space(),p2.space(),p3.space(),p4.space(),p1.space()].join("L")+"Z"
+					});
+				},200,mina.easeout);
+			});
+		});
+	</script>
+</body>
+</html>

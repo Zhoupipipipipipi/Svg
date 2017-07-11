@@ -1,0 +1,24 @@
+/*html{ width: 100%; height: 100%; }
+body{ width: 100%; height: 100%; background: #333; display: flex; align-items: center; }
+*{ margin: 0; padding: 0; }
+.container{ width: 500px; margin: 0 auto;}
+.container-top{ width: 100%; position: relative; }
+.container-top img { width: 100%; }
+.container-bottom{ width: 100%; overflow: hidden; margin-top: -5px; }
+.container-bottom-left,.container-bottom-right{ width: 50%; float: left;}
+.container-bottom-left img,.container-bottom-right img{ width: 100%; height: 135px;}
+#containerTop{ position: absolute; bottom: 0; left: 0; }*/
+
+html, body { margin: 0; height: 100%; background-color: #1ec6aa; font-family: 'microsoft yahei'; overflow: hidden; }
+.show-box { width: 320px; height: 320px; position: absolute; left: 50%; top: 50%; margin: -160px 0 0 -160px; }
+.show-list { cursor: pointer; position: relative; overflow: hidden; }
+.show-list-1 { height: 160px; background-color: #FDE685; }
+.show-list-2, .show-list-3 { width: 160px; height: 160px; float: left; }
+.show-list-2 { background-color: #fff; }
+.show-list-3 { background-color: #AE312F; }
+.show-list > img { position: absolute; z-index: 1; width: 100%; height: 100%; }
+
+.shape_svg { position: absolute; left: 0; bottom: 0; }
+
+.white { padding: 10px; color: #fff; position: absolute; z-index: 2; }
+.white:hover { text-decoration: none; }

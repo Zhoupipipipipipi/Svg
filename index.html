@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Svg</title>
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/snap.svg-min.js"></script>
+</head>
+<body style="background:#1ec6aa; ">
+	<svg id="svg" width="1200" height="900" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>
+	<script type="text/javascript">
+		//确定中心点
+		var centerPoint = [window.innerWidth/2,window.innerHeight/2];
+		//确定半径
+		var radius = 200;
+
+		var points = [
+		[centerPoint[0]-radius*Math.sin((54/180)*Math.PI),centerPoint[1]-radius*Math.sin(36/180*Math.PI)],
+		[centerPoint[0]+radius*Math.sin((18/180)*Math.PI),centerPoint[1]-radius*Math.sin(72/180*Math.PI)],
+		[centerPoint[0]+radius,centerPoint[1]],
+		[centerPoint[0]+radius*Math.sin((18/180)*Math.PI),centerPoint[1]+radius*Math.sin(72/180*Math.PI)],
+		[centerPoint[0]-radius*Math.sin((54/180)*Math.PI),centerPoint[1]+radius*Math.sin(36/180*Math.PI)]
+		];
+
+		//根据这五个点进行绘制
+		var svg = Snap("#svg");
+		var  polygon = svg.paper.polygon(points[0].join(),points[1].join(),points[2].join(),points[3].join(),points[4].join()).attr({
+			"fill":"#80ddcb"
+		});
+
+		var animatePoint = function(val){
+			polygon.attr({
+				"points":[points[0].join(),points[1].join(),centerPoint[0]+val,centerPoint[1],points[3].join(),points[4].join()].join()
+			});
+		}
+
+		polygon.hover(function(){
+			Snap.animate(radius,0,animatePoint,300,mina.backout);
+		},function(){
+			Snap.animate(0,radius,animatePoint,300,mina.backin);
+		});
+	</script>
+</body>
+</html>
